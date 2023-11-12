@@ -13,5 +13,6 @@ void afisare_tranzactii(Tranzactie tranzactii[], int nr_tranzactii){
 
         printf("\n  Tip:       %s", tranzactii[indx].tip);
         printf("\n\n");
+        printf("--------------------------------------------------");
     }
 }
