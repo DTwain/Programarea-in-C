@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "../UI/Aplicatie.h"
-
-typedef struct tranzactie{
-    char data[11];
-    char descriere[100];
-    float suma;
-    char tip[10];
-} Tranzactie;
+#include "../Infrastructura/infrastructura.h"
+#include "../Aplicatie/app.h"
 
 void meniu(){
     printf("1. Adauga o noua tranzactie\n");
@@ -15,14 +9,15 @@ void meniu(){
     printf("3. Afisare tranzactii\n");
     printf("4. Raport care cuprinde venitul si cheltuielile dintr-o perioada\n");
     printf("5. Salvare tranzactii in fisier\n");
+    printf("6. Preluare date din fisier\n");
 }
 void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
+    char data[11];
+    char descriere[100];
+    float suma;
+    char tip[10];
     switch(cmd){
         case 1:
-            char data[11];
-            char descriere[100];
-            float suma;
-            char tip[10];
             printf("Introduceti data (dd/mm/yyyy): ");
             scanf("%s", data);
             getc(stdin);
@@ -39,22 +34,22 @@ void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
             scanf("%s", tip);
 
             if(validare_data(data) && validare_suma(suma) && validare_tip(tip)){
-                add_tranzactie(tranzactii, data, descriere, suma, tip);
-                nr_tranzactii++;
+                add_tranzactie(tranzactii, nr_tranzactii, data, descriere, suma, tip);
+                *nr_tranzactii += 1;
             }
             else{
                 printf("DATE INVALIDE\n");
-                comanda(1, tranzactii, &nr_tranzactii);
+                comanda(1, tranzactii, nr_tranzactii);
             }
             break;
 
         case 2:
-            printf("Soldul contului este: %f", sold(tranzactii));
+            printf("Soldul contului este: %f", sold(tranzactii, *nr_tranzactii));
             break;
 
         case 3:
             printf("Tranzactiile sunt: ");
-            output(tranzactii);
+            afisare_tranzactii(tranzactii, *nr_tranzactii);
             break;
 
         case 4:
@@ -69,21 +64,26 @@ void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
             scanf("%s", end);
             getc(stdin);
 
-            if(validare_data(start) && validare_data(end) && (validare_start_mai_mic_decat_end(start, end) || strcmp(start, end) == 0))
-            raport_situatie_cont_perioada_a_b(tranzactii, start, end);
+            if(validare_data(start) && validare_data(end) && (data_in_ordine_cronologica(start, end) || strcmp(start, end) == 0))
+                situatie_cont(tranzactii, *nr_tranzactii, start, end);
             else{
                 printf("DATE INVALIDE\n");
-                comanda(4, tranzactii, &nr_tranzactii);
+                comanda(4, tranzactii, nr_tranzactii);
             }
             break;
-        case 5:
-            salvare(tranzactii, nr_tranzactii);
-            printf("Tranzactiile au fost salvate in fisier");
-            break;
+        // case 5: 
+        //     salvare(tranzactii, nr_tranzactii);
+        //     printf("Tranzactiile au fost salvate in fisier");
+        //     break;
+        
+        // case 6:
+        //     preluare(tranzactii, nr_tranzactii);
+        //     printf("Tranzactiile au fost preluate din fisier");
+        //     break;
     }
 }
 
-void run_console() {
+void run() {
     Tranzactie tranzactii[100];
     int lungime_tranzactii = 0;
     meniu();
@@ -102,5 +102,5 @@ void run_console() {
         printf("Doriti sa continuati? (da/nu): ");
         scanf("%s", rep);
     }    
-    
+    return;
 }

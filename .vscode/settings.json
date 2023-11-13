@@ -2,6 +2,7 @@
     "files.associations": {
         "string.h": "c",
         "aplicatie.h": "c",
-        "infrastructura.h": "c"
+        "infrastructura.h": "c",
+        "app.h": "c"
     }
 }

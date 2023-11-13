@@ -14,3 +14,4 @@ void add_tranzactie(Tranzactie tranzactii[], int *nr_tranzactii, char data[11], 
 float sold(Tranzactie tranzactii[], int nr_tranzactii);
 void afisare_tranzactii(Tranzactie tranzactii[], int nr_tranzactii);
 Inc_Out situatie_cont(Tranzactie tranzactii[], int nr_tranzactii, char data_start[11], char data_end[11]);
+
