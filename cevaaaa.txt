@@ -1,0 +1,1 @@
+gcc -o main main.c Infrastructura\validare.c Aplicatie\adauga_tranzactii.c Aplicatie\sold_cont.c Aplicatie\afisare_tranzactii.c Infrastructura\validare_data_ordine_cronologica.c Aplicatie\raport.c
