@@ -15,3 +15,4 @@ float sold(Tranzactie tranzactii[], int nr_tranzactii);
 void afisare_tranzactii(Tranzactie tranzactii[], int nr_tranzactii);
 Inc_Out situatie_cont(Tranzactie tranzactii[], int nr_tranzactii, char data_start[11], char data_end[11]);
 void salvare(FILE *file_ptr, Tranzactie tranzactii[], int nr_tranzacii);
+void getter(FILE *file_ptr, Tranzactie tranzactii[], int *nr_tranzactii);
