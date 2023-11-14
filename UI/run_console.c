@@ -11,7 +11,8 @@ void meniu(){
     printf("5. Salvare tranzactii in fisier\n");
     printf("6. Preluare date din fisier\n");
 }
-void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
+
+void comanda(FILE *file_ptr, int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
     char data[11];
     char descriere[100];
     float suma;
@@ -33,13 +34,11 @@ void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
             printf("Introduceti tipul (IN / OUT): ");
             scanf("%s", tip);
 
-            if(validare_data(data) && validare_suma(suma) && validare_tip(tip)){
+            if(validare_data(data) && validare_suma(suma) && validare_tip(tip))
                 add_tranzactie(tranzactii, nr_tranzactii, data, descriere, suma, tip);
-                *nr_tranzactii += 1;
-            }
             else{
                 printf("DATE INVALIDE\n");
-                comanda(1, tranzactii, nr_tranzactii);
+                comanda(file_ptr, 4, tranzactii, nr_tranzactii);
             }
             break;
 
@@ -68,13 +67,13 @@ void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
                 situatie_cont(tranzactii, *nr_tranzactii, start, end);
             else{
                 printf("DATE INVALIDE\n");
-                comanda(4, tranzactii, nr_tranzactii);
+                comanda(file_ptr, 4, tranzactii, nr_tranzactii);
             }
             break;
-        // case 5: 
-        //     salvare(tranzactii, nr_tranzactii);
-        //     printf("Tranzactiile au fost salvate in fisier");
-        //     break;
+        case 5: 
+            salvare(file_ptr, tranzactii, *nr_tranzactii);
+            printf("Tranzactiile au fost salvate in fisier");
+             break;
         
         // case 6:
         //     preluare(tranzactii, nr_tranzactii);
@@ -84,6 +83,8 @@ void comanda(int cmd, Tranzactie tranzactii[], int *nr_tranzactii){
 }
 
 void run() {
+    FILE * file_ptr;
+    file_ptr = fopen("tranzactii.txt", "w+");
     Tranzactie tranzactii[100];
     int lungime_tranzactii = 0;
     meniu();
@@ -96,7 +97,7 @@ void run() {
             printf("Comanda invalida. Introduceti comanda: ");
             scanf("%d", &cmd);
         }
-        comanda(cmd, tranzactii, &lungime_tranzactii);
+        comanda(file_ptr, cmd, tranzactii, &lungime_tranzactii);
 
 
         printf("Doriti sa continuati? (da/nu): ");
