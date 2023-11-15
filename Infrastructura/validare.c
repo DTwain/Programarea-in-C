@@ -68,7 +68,7 @@ bool validare_optiune(char optiune[10]){
     return false;
 }
 void test_validare_data(){
-    
+    // trebuie continuat
 }
 
 void test_validare_suma(){
