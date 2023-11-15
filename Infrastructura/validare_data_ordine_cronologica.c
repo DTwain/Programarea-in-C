@@ -45,3 +45,13 @@ bool data_in_ordine_cronologica(char data_start[11], char data_end[11]){
         return true;
     return false;
 }
+
+void test_data_in_ordine_cronologica(){
+    assert(data_in_ordine_cronologica("12/12/2012", "12/12/2012") == true);
+    assert(data_in_ordine_cronologica("12/12/2012", "12/12/2013") == true);
+    assert(data_in_ordine_cronologica("12/12/2012", "12/11/2012") == false);
+    assert(data_in_ordine_cronologica("12/12/2012", "11/12/2012") == false);
+    assert(data_in_ordine_cronologica("12/12/2012", "13/12/2012") == true);
+    assert(data_in_ordine_cronologica("12/12/2012", "12/13/2012") == true);
+    assert(data_in_ordine_cronologica("12/12/2012", "12/12/2011") == false);
+}

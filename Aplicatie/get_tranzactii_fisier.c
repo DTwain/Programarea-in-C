@@ -12,3 +12,4 @@ void getter(FILE *file_ptr, Tranzactie tranzactii[], int *nr_tranzactii){
             add_tranzactie(tranzactii, nr_tranzactii, data, descriere, suma, tip);
     }
 }
+

@@ -97,8 +97,14 @@ void comanda(FILE *file_ptr, int optiune, Tranzactie tranzactii[], int *nr_tranz
         break;
     }
 }
-
+void run_teste(){
+    test_add_tranzactii();
+    test_sold();
+    test_data_in_ordine_cronologica();
+}
 void run() {
+    run_teste();
+    
     FILE * file_ptr;
     file_ptr = fopen("comanda_de_rulare_si_fisier_tranzactii/tranzactii.txt", "a+"); // a+ = append + read practic deschide fisierul cu a+ pentru a nu sterge continutul
     Tranzactie tranzactii[100];               // Este posibil sa dorim sa luam tranzactiile din fisier ceea ce nu ar fi fost posibil 
