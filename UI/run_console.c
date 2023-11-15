@@ -101,6 +101,9 @@ void run_teste(){
     test_add_tranzactii();
     test_sold();
     test_data_in_ordine_cronologica();
+    test_validare_data();
+    test_validare_suma();
+    test_validare_tip();
 }
 void run() {
     run_teste();

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <assert.h>
 typedef enum { false, true } bool;
 
 bool validare_data(char data[11]) {
@@ -66,6 +66,32 @@ bool validare_optiune(char optiune[10]){
     strcmp(optiune, "4,0") == 0 || strcmp(optiune, "5,0") == 0 || strcmp(optiune, "6,0") == 0)
         return true;
     return false;
+}
+void test_validare_data(){
+    
+}
+
+void test_validare_suma(){
+    assert(validare_suma(100) == true);
+    assert(validare_suma(-100) == false);
+    assert(validare_suma(0) == true);
+    assert(validare_suma(100.5) == true);
+    assert(validare_suma(-100.5) == false);
+}
+
+void test_validare_tip(){
+    assert(validare_tip("in") == true);
+    assert(validare_tip("out") == true);
+    assert(validare_tip("IN") == true);
+    assert(validare_tip("OUT") == true);
+    assert(validare_tip("In") == true);
+    assert(validare_tip("Out") == true);
+    assert(validare_tip("INN") == false);
+    assert(validare_tip("OUTT") == false);
+    assert(validare_tip("inout") == false);
+    assert(validare_tip("inout") == false);
+    assert(validare_tip("inout") == false);
+    assert(validare_tip("inout") == false);
 }
 
 
